@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ item.name }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="editItem(item)">
+        <ion-icon ios="ios-create" md="md-create"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="shareData(item)">
+        <ion-icon ios="ios-share" md="md-share"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+  
+</ion-header>
+
+<ion-content>
+  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+  </div>
+
+  <div class="item-detail" padding>
+    <h1>{{item.serial}}.{{item.name}}</h1>
+    <h2>{{item.price | currency: 'Rs '}}</h2>
+    <p>{{item.description}}</p>
+  </div>
+</ion-content>

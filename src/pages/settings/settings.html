@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="form" *ngIf="settingsReady">
+    <ion-list *ngIf="page == 'main'">
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
+        <ion-toggle formControlName="option1"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION2' | translate }}</ion-label>
+        <ion-input formControlName="option2"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION3' | translate }}</ion-label>
+        <ion-select formControlName="option3">
+          <ion-option value="1" checked="true">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
+        {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
+      </button>
+    </ion-list>
+
+    <ion-list *ngIf="page == 'profile'">
+      <!-- <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION4' | translate }}</ion-label>
+        <ion-input formControlName="option4"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label>Display Name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Phone Number</ion-label>
+        <ion-input formControlName="contact"></ion-input>
+      </ion-item>-->
+      <ion-item>
+        <ion-label>Image Url</ion-label>
+        <ion-input formControlName="photoURL"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" block (click)="updateProfile()">Update</button>
+      </div>
+    </ion-list>
+  </form>
+
+</ion-content>

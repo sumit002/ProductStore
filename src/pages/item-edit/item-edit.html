@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>{{ item.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="updateItem()">
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+    <div class="profile-image-wrapper" (click)="getPicture()" >
+      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+        <ion-icon name="add"></ion-icon>
+        <div>
+          <!-- {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }} -->Add Image
+        </div>
+      </div>
+      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" 
+      *ngIf="this.form.controls.profilePic.value"></div>
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="serial" formControlName="serial"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="name" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="price" formControlName="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Add to Favorite</ion-label>
+        <ion-icon name="heart" color="light" item-end *ngIf="!this.form.controls.isFavorite.value" (click)="this.form.controls.isFavorite.value = true;"></ion-icon>
+        <ion-icon name="heart" color="danger" item-end *ngIf="this.form.controls.isFavorite.value" (click)="this.form.controls.isFavorite.value = false;"></ion-icon> 
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>In Stock</ion-label>
+        <ion-toggle formControlName="inStock"></ion-toggle>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Is Expired</ion-label>
+        <ion-toggle formControlName="isActive"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-input type="text" placeholder="description" formControlName="description"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button type="submit" ion-button color="primary" block [disabled]="!isReadyToSave">Submit</button>
+    </div>
+
+  </form>
+
+
+  <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+  </div>
+
+  <div class="item-detail" padding>
+    <h2>{{item.serial}}.{{item.name}}</h2>
+    <h2>{{item.price | currency: 'Rs '}}</h2>
+    <p>{{item.description}}</p>
+  </div> -->
+</ion-content>
